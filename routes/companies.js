@@ -9,11 +9,21 @@ router.get('/', function(req, res) {
   var companies = [];
   db.serialize(function() {
     db.each("SELECT * FROM companies", function(err, row) {
-      companies.push({title: row.name, date: row.date, url: row.url});
+      companies.push({
+        id: row.itid,
+        name: row.name,
+        date: row.date,
+        url: row.url,
+        location: row.location,
+        state: row.state,
+        area: row.area,
+        stage: row.stage,
+        tags: row.tags,
+        discr: row.discr
+      });
     }, function() {
         // All done fetching records, render response
-        // res.render("dynamic", {title: "Dynamic", posts: posts})
-        res.send(companies);
+        res.render("Companies", {title: 'companies', companies: companies});
     });
   });
 });

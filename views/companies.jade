@@ -8,4 +8,28 @@ block content
   div.content.right
     h1= title
     p Welcome to #{title}
-    p= companies[0]
+    table
+      tr
+        th id
+        th name
+        th url
+        th date
+        th location
+        th state
+        th area
+        th stage
+        th tags
+        th discr
+      - each company in companies
+        tr
+          td= company.id
+          td= company.name
+          td= company.url
+          td= company.date
+          td= company.location
+          td= company.state
+          td= company.area
+          td= company.stage
+          td= company.tags
+          td= company.discr
+
