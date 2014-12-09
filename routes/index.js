@@ -51,7 +51,7 @@ router.get('/', function(req, res) {
       companies.push({
         id: row.itid,
         name: row.name,
-        date: row.date,
+        date: row.date.replace('年','-').replace('月',''),
         url: row.url,
         location: row.location,
         state: row.state,
