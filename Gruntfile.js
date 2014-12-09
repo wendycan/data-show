@@ -8,12 +8,8 @@ module.exports = function(grunt) {
           drop_console: true
         }
       },
-      src: {
-        src: ['src/javascripts/*.coffee'],
-        dest: 'public/javascripts/all.js'
-      },
       dep: {
-        src: ['node_modules/jquery/dist/jquery.min.js'],
+        src: ['node_modules/jquery/dist/jquery.min.js', 'node_modules/chart.js/Chart.min.js'],
         dest: 'public/javascripts/deps.js'
       }
     },
@@ -58,5 +54,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-contrib-watch');
   // Default task(s).
-  grunt.registerTask('default', ['coffee', 'sass']);
+  grunt.registerTask('default', ['coffee', 'sass', 'uglify']);
 };
