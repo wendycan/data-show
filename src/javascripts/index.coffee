@@ -60,17 +60,34 @@ statByTimes = (records)->
 
 statBySum = (records)->
 
+renderStatAreas = (data)->
+  data_years = stateByYear(data.companies)
+  for data_year, i in data_years
+    results = statByArea(data_year)
+    $('#areas-'+i).highcharts
+      title:
+        text: "#{data_year.name}年"
+      series: [
+        type: 'pie'
+        name: 'Browser share'
+        data: results
+      ]
 
 $(document).ready ->
   $.get('/companies').done (data)->
-    data_years = stateByYear(data.companies)
-    for data_year, i in data_years
-      results = statByArea(data_year)
-      $('#areas-'+i).highcharts
-        title:
-          text: "#{data_year.name}年"
-        series: [
-          type: 'pie'
-          name: 'Browser share'
-          data: results
-        ]
+    $('#content').html $('#t-areas').html()
+    renderStatAreas(data)
+
+    # event
+    $('#areas').click ->
+      $('#content').html $('#t-areas').html()
+      renderStatAreas(data)
+
+    $('#locations').click ->
+      $('#content').html $('#t-locations').html()
+
+    $('#times').click ->
+      $('#content').html $('#t-times').html()
+
+    $('#sum').click ->
+      $('#content').html $('#t-sum').html()

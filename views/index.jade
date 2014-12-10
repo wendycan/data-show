@@ -3,13 +3,17 @@ extends layout
 block content
   div.sidebar.left
     ul
-      li 领域
-      li 地域
-      li 融资次数
-      li 融资金额
-  div.content.right.columns-2
+      li#areas 领域
+      li#locations 地域
+      li#times 融资次数
+      li#sum 融资金额
+  div#content.content.right.columns-2
+  script(type='text/template', id='t-areas')
     div#areas-0
     div#areas-1
     div#areas-2
     div#areas-3
     div#areas-4
+  script(type='text/template', id='t-locations')
+  script(type='text/template', id='t-times')
+  script(type='text/template', id='t-sum')
