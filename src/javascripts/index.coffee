@@ -23,8 +23,17 @@ areas = [
 
 statByArea = (records)->
   results = []
-  results = stateByYear(records)
-  console.log results
+  for area in areas
+    r = []
+    r[0] = area
+    r[1] = 0
+    results.push r
+  data = records.data
+  for d in data
+    index = areas.indexOf(d.area)
+    if index >= 0
+      results[index][1] += 1
+  results
 
 stateByYear = (records)->
   years = ['2010', '2011', '2012', '2013', '2014']
@@ -54,6 +63,14 @@ statBySum = (records)->
 
 $(document).ready ->
   $.get('/companies').done (data)->
-    console.log data
-    console.log (data.companies)
-    results = statByArea(data.companies)
+    data_years = stateByYear(data.companies)
+    for data_year, i in data_years
+      results = statByArea(data_year)
+      $('#areas-'+i).highcharts
+        title:
+          text: "#{data_year.name}年"
+        series: [
+          type: 'pie'
+          name: 'Browser share'
+          data: results
+        ]

@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
       });
     }, function() {
         // All done fetching records, render response
-        res.json({companies: companies.slice(0,10)});
+        res.json({companies: companies.slice(0,100)});
         // res.render("Companies", {title: 'companies', companies: companies.slice(0,10)});
     });
   });
