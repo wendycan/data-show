@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         }
       },
       dep: {
-        src: ['node_modules/jquery/dist/jquery.min.js', 'node_modules/chart.js/Chart.min.js'],
+        src: ['node_modules/jquery/dist/jquery.min.js'],
         dest: 'public/javascripts/deps.js'
       }
     },

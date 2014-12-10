@@ -27,7 +27,13 @@ var areas = [
 ];
 
 var statByArea = function(records){
-
+  var results = [];
+  for (var i = 0; i < areas.length; i++) {
+    var r = {};
+    r.name = areas[i];
+    r.data = [];
+    results.push(r);
+  }
 };
 
 var statByLocation = function(records){

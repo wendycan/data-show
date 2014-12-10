@@ -14,7 +14,6 @@
     "debug": "~2.0.0",
     "jade": "~1.6.0",
     "jquery": "latest",
-    "chart.js": "latest",
     "grunt": "~0.4.1",
     "sqlite3": "latest",
     "grunt-contrib-jshint": "~0.6.3",
