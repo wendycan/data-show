@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
       companies.push({
         id: row.itid,
         name: row.name,
-        date: row.date.replace('年','-').replace('月',''),
+        date: (new Date(row.date.replace('年','-').replace('月',''))).valueOf(),
         url: row.url,
         location: row.location,
         state: row.state,
@@ -23,7 +23,8 @@ router.get('/', function(req, res) {
       });
     }, function() {
         // All done fetching records, render response
-        res.render("Companies", {title: 'companies', companies: companies});
+        res.json({companies: companies.slice(0,10)});
+        // res.render("Companies", {title: 'companies', companies: companies.slice(0,10)});
     });
   });
 });
