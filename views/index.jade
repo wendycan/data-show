@@ -8,14 +8,31 @@ block content
       li#times 融资次数
       li#sum 融资金额
   div#content.content.right
+    ul
+      li#lines-areas 折线图
+      li#details-areas 详细
+    div#areas-content
   script(type='text/template', id='t-areas')
-    div.columns-2
-      div#areas-0
-      div#areas-1
-      div#areas-2
-      div#areas-3
-      div#areas-4
+    ul
+      li#lines-areas 折线图
+      li#details-areas 详细
+    div#areas-content
+  script(type='text/template', id='t-details-areas')
+    div#areas-details-content
+      .columns-2
+        div#areas-0
+        div#areas-1
+        div#areas-2
+        div#areas-3
+        div#areas-4
   script(type='text/template', id='t-locations')
-    div.map#locations-0
+    .columns-2
+      div.map#locations-0
+      div.map#locations-1
+      div.map#locations-2
+      div.map#locations-3
+      div.map#locations-4
+  script(type='text/template', id='t-lines-areas')
+    div#lines-areas-content
   script(type='text/template', id='t-times')
   script(type='text/template', id='t-sum')

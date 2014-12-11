@@ -20,6 +20,39 @@ areas = [
   '法律法务',
   '其他'
 ]
+locations = [
+  '北京',
+  '天津',
+  '河北',
+  '山西',
+  '辽宁',
+  '吉林',
+  '黑龙江',
+  '上海',
+  '江苏',
+  '浙江',
+  '安徽',
+  '福建',
+  '江西',
+  '山东',
+  '河南',
+  '湖北',
+  '湖南',
+  '广东',
+  '广西',
+  '海南',
+  '重庆',
+  '四川',
+  '贵州',
+  '云南',
+  '西藏',
+  '陕西',
+  '甘肃',
+  '青海',
+  '宁夏',
+  '新疆',
+  '内蒙古'
+]
 
 statByArea = (records)->
   results = []
@@ -34,6 +67,51 @@ statByArea = (records)->
     if index >= 0
       results[index][1] += 1
   results
+
+statByAreaLines = (records)->
+  results = []
+  data = []
+  for area in areas
+    r = []
+    r[0] = area
+    r[1] = []
+    results.push r
+    data.push r
+  for d in records
+    index = areas.indexOf(d.area)
+    if index >= 0
+      results[index][1].push d.date
+  for r,i in results
+    data[i][1] = statByMonth(r)
+  data
+
+statByMonth = (records)->
+  data = bubbleSort(records[1])
+  labels = []
+  results = []
+  for d in data
+    index = labels.indexOf(d)
+    if index >= 0
+      if results[index]
+        results[index][1] += 1
+    else
+      labels.push d
+      results.push [d,1]
+  results
+
+bubbleSort = (list) ->
+  anySwaps = false
+  swapPass = ->
+      for r in [0..list.length-2]
+          if list[r] > list[r+1]
+              anySwaps = true
+              [list[r], list[r+1]] = [list[r+1], list[r]]
+  swapPass()
+  while anySwaps
+      anySwaps = false
+      swapPass()
+  list
+
 
 stateByYear = (records)->
   years = ['2010', '2011', '2012', '2013', '2014']
@@ -53,7 +131,18 @@ stateByYear = (records)->
   results
 
 statByLocation = (records)->
-
+  results = []
+  for location in locations
+    r = {}
+    r.name = location
+    r.value = 0
+    results.push r
+  data = records.data
+  for d in data
+    index = locations.indexOf(d.location)
+    if index >= 0
+      results[index].value += 1
+  results
 
 statByTimes = (records)->
 
@@ -64,7 +153,7 @@ renderStatAreas = (data)->
   data_years = stateByYear(data.companies)
   for data_year, i in data_years
     results = statByArea(data_year)
-    $('#areas-'+i).highcharts
+    $('#areas-' + i).highcharts
       title:
         text: "#{data_year.name}年"
       series: [
@@ -73,335 +162,77 @@ renderStatAreas = (data)->
         data: results
       ]
 
-renderStatLocations = (data)->
-  data = [
-        {
-            "hc-key": "tw-ph",
-            "value": 0
-        },
-        {
-            "hc-key": "cn-sh",
-            "value": 1
-        },
-        {
-            "hc-key": "tw-km",
-            "value": 2
-        },
-        {
-            "hc-key": "cn-zj",
-            "value": 3
-        },
-        {
-            "hc-key": "tw-lk",
-            "value": 4
-        },
-        {
-            "hc-key": "cn-3664",
-            "value": 5
-        },
-        {
-            "hc-key": "cn-3681",
-            "value": 6
-        },
-        {
-            "hc-key": "tw-tw",
-            "value": 7
-        },
-        {
-            "hc-key": "tw-cs",
-            "value": 8
-        },
-        {
-            "hc-key": "cn-gs",
-            "value": 9
-        },
-        {
-            "hc-key": "cn-6657",
-            "value": 10
-        },
-        {
-            "hc-key": "cn-6663",
-            "value": 11
-        },
-        {
-            "hc-key": "cn-6665",
-            "value": 12
-        },
-        {
-            "hc-key": "cn-6666",
-            "value": 13
-        },
-        {
-            "hc-key": "cn-6667",
-            "value": 14
-        },
-        {
-            "hc-key": "cn-6669",
-            "value": 15
-        },
-        {
-            "hc-key": "cn-6670",
-            "value": 16
-        },
-        {
-            "hc-key": "cn-6671",
-            "value": 17
-        },
-        {
-            "hc-key": "tw-kh",
-            "value": 18
-        },
-        {
-            "hc-key": "tw-hs",
-            "value": 19
-        },
-        {
-            "hc-key": "tw-hh",
-            "value": 20
-        },
-        {
-            "hc-key": "tw-cl",
-            "value": 21
-        },
-        {
-            "hc-key": "tw-ml",
-            "value": 22
-        },
-        {
-            "hc-key": "cn-nx",
-            "value": 23
-        },
-        {
-            "hc-key": "cn-sa",
-            "value": 24
-        },
-        {
-            "hc-key": "tw-ty",
-            "value": 25
-        },
-        {
-            "hc-key": "cn-3682",
-            "value": 26
-        },
-        {
-            "hc-key": "tw-cg",
-            "value": 27
-        },
-        {
-            "hc-key": "cn-6655",
-            "value": 28
-        },
-        {
-            "hc-key": "cn-ah",
-            "value": 29
-        },
-        {
-            "hc-key": "cn-hu",
-            "value": 30
-        },
-        {
-            "hc-key": "tw-hl",
-            "value": 31
-        },
-        {
-            "hc-key": "tw-nt",
-            "value": 32
-        },
-        {
-            "hc-key": "tw-th",
-            "value": 33
-        },
-        {
-            "hc-key": "cn-6656",
-            "value": 34
-        },
-        {
-            "hc-key": "cn-6658",
-            "value": 35
-        },
-        {
-            "hc-key": "cn-6659",
-            "value": 36
-        },
-        {
-            "hc-key": "tw-yl",
-            "value": 37
-        },
-        {
-            "hc-key": "cn-6660",
-            "value": 38
-        },
-        {
-            "hc-key": "cn-6661",
-            "value": 39
-        },
-        {
-            "hc-key": "cn-6662",
-            "value": 40
-        },
-        {
-            "hc-key": "cn-6664",
-            "value": 41
-        },
-        {
-            "hc-key": "cn-6668",
-            "value": 42
-        },
-        {
-            "hc-key": "tw-pt",
-            "value": 43
-        },
-        {
-            "hc-key": "tw-tt",
-            "value": 44
-        },
-        {
-            "hc-key": "cn-gd",
-            "value": 45
-        },
-        {
-            "hc-key": "cn-fj",
-            "value": 46
-        },
-        {
-            "hc-key": "tw-tn",
-            "value": 47
-        },
-        {
-            "hc-key": "cn-bj",
-            "value": 48
-        },
-        {
-            "hc-key": "cn-hb",
-            "value": 49
-        },
-        {
-            "hc-key": "tw-il",
-            "value": 50
-        },
-        {
-            "hc-key": "tw-tp",
-            "value": 51
-        },
-        {
-            "hc-key": "cn-sd",
-            "value": 52
-        },
-        {
-            "hc-key": "tw-ch",
-            "value": 53
-        },
-        {
-            "hc-key": "cn-tj",
-            "value": 54
-        },
-        {
-            "hc-key": "cn-js",
-            "value": 55
-        },
-        {
-            "hc-key": "cn-ha",
-            "value": 56
-        },
-        {
-            "hc-key": "cn-qh",
-            "value": 57
-        },
-        {
-            "hc-key": "cn-jl",
-            "value": 58
-        },
-        {
-            "hc-key": "cn-xz",
-            "value": 59
-        },
-        {
-            "hc-key": "cn-xj",
-            "value": 60
-        },
-        {
-            "hc-key": "cn-he",
-            "value": 61
-        },
-        {
-            "hc-key": "cn-nm",
-            "value": 62
-        },
-        {
-            "hc-key": "cn-hl",
-            "value": 63
-        },
-        {
-            "hc-key": "cn-yn",
-            "value": 64
-        },
-        {
-            "hc-key": "cn-gx",
-            "value": 65
-        },
-        {
-            "hc-key": "cn-ln",
-            "value": 66
-        },
-        {
-            "hc-key": "cn-sc",
-            "value": 67
-        },
-        {
-            "hc-key": "cn-cq",
-            "value": 68
-        },
-        {
-            "hc-key": "cn-gz",
-            "value": 69
-        },
-        {
-            "hc-key": "cn-hn",
-            "value": 70
-        },
-        {
-            "hc-key": "cn-sx",
-            "value": 71
-        },
-        {
-            "hc-key": "cn-jx",
-            "value": 72
-        }
-    ]
-  $('#locations-0').highcharts('Map', {
-    colorAxis: {
-      min: 0
+renderStatAreasLines = (data)->
+  results = statByAreaLines(data.companies)
+  series = []
+  for r in results
+    t = {}
+    t.name = r[0]
+    t.data = r[1]
+    series.push t
+  $('#lines-areas-content').highcharts({
+    chart:
+      type: 'spline'
+    xAxis: {
+      type: 'datetime',
+      title: {
+          text: 'Date'
+      }
     }
-    series : [
-      data : data
-      mapData: Highcharts.maps['countries/cn/custom/cn-all-sar-taiwan']
-      joinBy: 'hc-key'
-      name: 'Random data'
-      mapNavigation: {
-        enabled: true,
-        buttonOptions: {
-            verticalAlign: 'bottom'
-        }
-      }
-      states: {
-        hover: {
-            color: '#BADA55'
-        }
-      }
-    ]
+    series: series
   })
+
+renderStatLocations = (data)->
+  data_years = stateByYear(data.companies)
+  for data_year, i in data_years
+    results = statByLocation(data_year)
+    $('#locations-' + i).highcharts('Map', {
+      chart: {
+        width: '800'
+        height: '400'
+      }
+      colorAxis: {
+        min: 0
+        minColor: '#FFFFFF'
+        maxColor: '#FF6722'
+      }
+      title: {
+        text: "#{data_year.name}年"
+      }
+      series : [
+        data : results
+        mapData: Highcharts.maps['countries/cn/custom/cn-all-sar-taiwan']
+        joinBy: 'name'
+        name: '公司数量'
+        states: {
+          hover: {
+              color: '#6EE5D8'
+          }
+        }
+      ]
+    })
 
 $(document).ready ->
   $.get('/companies').done (data)->
     $('#content').html $('#t-areas').html()
+    $('#areas-content').html $('#t-details-areas').html()
     renderStatAreas(data)
 
-    # event
+    # areas event
     $('#areas').click ->
       $('#content').html $('#t-areas').html()
-      console.log 'here'
+      $('#areas-content').html $('#t-details-areas').html()
       renderStatAreas(data)
 
+    $('#details-areas').click ->
+      $('#areas-content').html $('#t-details-areas').html()
+      renderStatAreas(data)
+
+    $('#lines-areas').click ->
+      $('#areas-content').html $('#t-lines-areas').html()
+      renderStatAreasLines(data)
+
+    # locations event
     $('#locations').click ->
       $('#content').html $('#t-locations').html()
       renderStatLocations(data)
