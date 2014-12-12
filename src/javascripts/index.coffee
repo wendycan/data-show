@@ -85,6 +85,23 @@ statByAreaLines = (records)->
     data[i][1] = statByMonth(r)
   data
 
+statByLocationsLines = (records)->
+  results = []
+  data = []
+  for location in locations
+    r = []
+    r[0] = location
+    r[1] = []
+    results.push r
+    data.push r
+  for d in records
+    index = locations.indexOf(d.location)
+    if index >= 0
+      results[index][1].push d.date
+  for r,i in results
+    data[i][1] = statByMonth(r)
+  data
+
 statByMonth = (records)->
   data = bubbleSort(records[1])
   labels = []
@@ -144,11 +161,6 @@ statByLocation = (records)->
       results[index].value += 1
   results
 
-statByTimes = (records)->
-
-
-statBySum = (records)->
-
 renderStatAreas = (data)->
   data_years = stateByYear(data.companies)
   for data_year, i in data_years
@@ -171,6 +183,26 @@ renderStatAreasLines = (data)->
     t.data = r[1]
     series.push t
   $('#lines-areas-content').highcharts({
+    chart:
+      type: 'spline'
+    xAxis: {
+      type: 'datetime',
+      title: {
+          text: 'Date'
+      }
+    }
+    series: series
+  })
+
+renderStatLocationsLines = (data)->
+  results = statByLocationsLines(data.companies)
+  series = []
+  for r in results
+    t = {}
+    t.name = r[0]
+    t.data = r[1]
+    series.push t
+  $('#lines-locations-content').highcharts({
     chart:
       type: 'spline'
     xAxis: {
@@ -232,5 +264,13 @@ $(document).ready ->
 
     # locations event
     $('#locations').click ->
+      $('#content').html $('#t-lines-locations').html()
+      renderStatLocationsLines(data)
+
+    $('#lines-locations').click ->
+      $('#content').html $('#t-lines-locations').html()
+      renderStatLocationsLines(data)
+
+    $('#details-locations').click ->
       $('#content').html $('#t-locations').html()
       renderStatLocations(data)
