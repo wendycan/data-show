@@ -213,32 +213,24 @@ renderStatLocations = (data)->
     })
 
 $(document).ready ->
-  $.get('/companies').done (data)->
-    $('#content').html $('#t-areas').html()
-    $('#areas-content').html $('#t-details-areas').html()
-    renderStatAreas(data)
+  $.get('/companies/data').done (data)->
+    $('#content').html $('#t-lines-areas').html()
+    renderStatAreasLines(data)
 
     # areas event
     $('#areas').click ->
-      $('#content').html $('#t-areas').html()
-      $('#areas-content').html $('#t-details-areas').html()
-      renderStatAreas(data)
+      $('#content').html $('#t-lines-areas').html()
+      renderStatAreasLines(data)
 
     $('#details-areas').click ->
-      $('#areas-content').html $('#t-details-areas').html()
+      $('#content').html $('#t-details-areas').html()
       renderStatAreas(data)
 
     $('#lines-areas').click ->
-      $('#areas-content').html $('#t-lines-areas').html()
+      $('#content').html $('#t-lines-areas').html()
       renderStatAreasLines(data)
 
     # locations event
     $('#locations').click ->
       $('#content').html $('#t-locations').html()
       renderStatLocations(data)
-
-    $('#times').click ->
-      $('#content').html $('#t-times').html()
-
-    $('#sum').click ->
-      $('#content').html $('#t-sum').html()

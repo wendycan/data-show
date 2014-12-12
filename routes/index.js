@@ -6,6 +6,14 @@ var file = "itjuzi";
 
 /* GET users listing. */
 router.get('/', function(req, res) {
+  res.render("Index", {title: 'companies'});
+});
+
+router.get('/investevents', function(req, res) {
+  res.render("Investevents", {title: 'investevents'});
+});
+
+router.get('/companies', function(req, res) {
   var db = new sqlite3.Database(file);
   var companies = [];
   db.serialize(function() {
@@ -13,7 +21,7 @@ router.get('/', function(req, res) {
       companies.push({
         id: row.itid,
         name: row.name,
-        date: row.date.replace('年','-').replace('月',''),
+        date: (new Date(row.date.replace('年','-').replace('月',''))).valueOf(),
         url: row.url,
         location: row.location,
         state: row.state,
@@ -23,8 +31,7 @@ router.get('/', function(req, res) {
         discr: row.discr
       });
     }, function() {
-        // All done fetching records, render response
-        res.render("Index", {title: 'companies'});
+        res.render("Companies", {title: 'companies', companies: companies.slice(0,100)});
     });
   });
 });

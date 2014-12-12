@@ -1,35 +1,30 @@
 extends layout
 
 block content
-  div.sidebar.left
-    ul
-      li list1
-      li list3
-  div.content.right
-    h1= title
-    p Welcome to #{title}
-    table
+  h1= title
+  p Welcome to #{title}
+  table
+    tr
+      th id
+      th name
+      th url
+      th date
+      th location
+      th state
+      th area
+      th stage
+      th tags
+      th discr
+    - each company in companies
       tr
-        th id
-        th name
-        th url
-        th date
-        th location
-        th state
-        th area
-        th stage
-        th tags
-        th discr
-      - each company in companies
-        tr
-          td= company.id
-          td= company.name
-          td= company.url
-          td= company.date
-          td= company.location
-          td= company.state
-          td= company.area
-          td= company.stage
-          td= company.tags
-          td= company.discr
+        td= company.id
+        td= company.name
+        td= company.url
+        td= company.date
+        td= company.location
+        td= company.state
+        td= company.area
+        td= company.stage
+        td= company.tags
+        td= company.discr
 

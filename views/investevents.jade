@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h2.text-center
+    span 融资事件
+    &nbsp;&nbsp;
+    a(href="/") 公司概况
+  div.sidebar.left
+    p#times 融资次数
+    p#sum 融资金额
+    //- ul
+    //-   li#lines-sum 折线图
+    //-   li#details-sum 详细
+  div#content.content.right
+
+  script(type='text/template', id='t-lines-times')
+    div#lines-times-content
+  script(type='text/template', id='t-lines-sum')
+    div#lines-sum-content
