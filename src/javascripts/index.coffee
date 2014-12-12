@@ -251,6 +251,7 @@ $(document).ready ->
 
     # areas event
     $('#areas').click ->
+      $('#areas').parent().find('.sub-nav').toggle('slow')
       $('#content').html $('#t-lines-areas').html()
       renderStatAreasLines(data)
 
@@ -264,6 +265,7 @@ $(document).ready ->
 
     # locations event
     $('#locations').click ->
+      $('#locations').parent().find('.sub-nav').toggle('slow')
       $('#content').html $('#t-lines-locations').html()
       renderStatLocationsLines(data)
 
@@ -274,3 +276,4 @@ $(document).ready ->
     $('#details-locations').click ->
       $('#content').html $('#t-locations').html()
       renderStatLocations(data)
+
