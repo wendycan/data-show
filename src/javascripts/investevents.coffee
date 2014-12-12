@@ -21,14 +21,6 @@ areas = [
   '其他'
 ]
 
-money = [
-  '数十万'
-  '数百万'
-  '数千万'
-  '亿元及以上'
-  '未透露'
-]
-
 statByTimesLines = (records)->
   results = []
   data = []
