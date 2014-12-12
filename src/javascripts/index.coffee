@@ -174,6 +174,7 @@ renderStatAreas = (data)->
         data: results
       ]
 
+
 renderStatAreasLines = (data)->
   results = statByAreaLines(data.companies)
   series = []
@@ -185,6 +186,8 @@ renderStatAreasLines = (data)->
   $('#lines-areas-content').highcharts({
     chart:
       zoomType: 'xy'
+    title:
+      text: '近五年来公司领域分布'
     xAxis: {
       type: 'datetime',
       title: {
@@ -192,6 +195,12 @@ renderStatAreasLines = (data)->
       }
     }
     series: series
+    credits:
+      enabled: false
+    plotOptions:
+      line:
+        dataLabels:
+          enabled: true
   })
 
 renderStatLocationsLines = (data)->
@@ -205,12 +214,20 @@ renderStatLocationsLines = (data)->
   $('#lines-locations-content').highcharts({
     chart:
       zoomType: 'xy'
+    title:
+      text: '近五年来公司地域分布'
     xAxis: {
       type: 'datetime',
       title: {
           text: 'Date'
       }
     }
+    credits:
+      enabled: false
+    plotOptions:
+      line:
+        dataLabels:
+          enabled: true
     series: series
   })
 
@@ -251,29 +268,43 @@ $(document).ready ->
 
     # areas event
     $('#areas').click ->
+      $('.button').removeClass('active')
+      $('#details-areas').addClass('active')
       $('#areas').parent().find('.sub-nav').toggle('slow')
       $('#content').html $('#t-lines-areas').html()
       renderStatAreasLines(data)
 
     $('#details-areas').click ->
+      $('.button').removeClass('active')
+      $('#details-areas').addClass('active')
       $('#content').html $('#t-details-areas').html()
       renderStatAreas(data)
 
     $('#lines-areas').click ->
+      $('.button').removeClass('active')
+      $('#lines-areas').addClass('active')
       $('#content').html $('#t-lines-areas').html()
       renderStatAreasLines(data)
 
     # locations event
     $('#locations').click ->
+      $('.button').removeClass('active')
+      $('#lines-locations').addClass('active')
+
       $('#locations').parent().find('.sub-nav').toggle('slow')
       $('#content').html $('#t-lines-locations').html()
       renderStatLocationsLines(data)
 
     $('#lines-locations').click ->
+      $('.button').removeClass('active')
+      $('#lines-locations').addClass('active')
+
       $('#content').html $('#t-lines-locations').html()
       renderStatLocationsLines(data)
 
     $('#details-locations').click ->
+      $('.button').removeClass('active')
+      $('#details-locations').addClass('active')
       $('#content').html $('#t-locations').html()
       renderStatLocations(data)
 
