@@ -18,8 +18,13 @@ router.get('/data', function(req, res) {
       });
     }, function() {
         // All done fetching records, render response
-        res.json({investevents: investevents});
-        // res.render("Companies", {title: 'companies', companies: companies.slice(0,10)});
+        data = [];
+        for (var i = 0; i < investevents.length; i++) {
+          if(investevents[i].date >= 1262275200000) {
+            data.push(investevents[i]);
+          }
+        }
+        res.json({investevents: data});
     });
   });
 });

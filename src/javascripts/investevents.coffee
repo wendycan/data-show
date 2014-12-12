@@ -74,14 +74,26 @@ renderStatTimesLines = (data)->
     t.data = r[1]
     series.push t
   $('#lines-times-content').highcharts({
+    title:
+      text: '公司融资记录'
     chart:
-      type: 'spline'
+      zoomType: 'xy'
     xAxis: {
       type: 'datetime',
       title: {
-          text: 'Date'
+          text: '时间'
       }
     }
+    yAxis: {
+      title:
+        text: '数量'
+    }
+    credits:
+      enabled: false
+    plotOptions:
+      line:
+        dataLabels:
+          enabled: true
     series: series
   })
 

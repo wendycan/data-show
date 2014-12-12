@@ -184,7 +184,7 @@ renderStatAreasLines = (data)->
     series.push t
   $('#lines-areas-content').highcharts({
     chart:
-      type: 'spline'
+      zoomType: 'xy'
     xAxis: {
       type: 'datetime',
       title: {
@@ -204,7 +204,7 @@ renderStatLocationsLines = (data)->
     series.push t
   $('#lines-locations-content').highcharts({
     chart:
-      type: 'spline'
+      zoomType: 'xy'
     xAxis: {
       type: 'datetime',
       title: {

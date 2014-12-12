@@ -23,7 +23,13 @@ router.get('/data', function(req, res) {
       });
     }, function() {
         // All done fetching records, render response
-        res.json({companies: companies});
+        data = [];
+        for (var i = 0; i < companies.length; i++) {
+          if(companies[i].date >= 1262275200000) {
+            data.push(companies[i]);
+          }
+        }
+        res.json({companies: data});
         // res.render("Companies", {title: 'companies', companies: companies.slice(0,10)});
     });
   });
