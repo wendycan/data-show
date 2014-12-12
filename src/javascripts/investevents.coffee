@@ -90,10 +90,6 @@ renderStatTimesLines = (data)->
     }
     credits:
       enabled: false
-    plotOptions:
-      line:
-        dataLabels:
-          enabled: true
     series: series
   })
 

@@ -197,10 +197,6 @@ renderStatAreasLines = (data)->
     series: series
     credits:
       enabled: false
-    plotOptions:
-      line:
-        dataLabels:
-          enabled: true
   })
 
 renderStatLocationsLines = (data)->
@@ -224,10 +220,6 @@ renderStatLocationsLines = (data)->
     }
     credits:
       enabled: false
-    plotOptions:
-      line:
-        dataLabels:
-          enabled: true
     series: series
   })
 
