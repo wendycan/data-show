@@ -259,6 +259,8 @@ renderStatLocations = (data)->
           }
         }
       ]
+      credits:
+        enabled: false
     })
 
 $(document).ready ->
