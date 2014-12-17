@@ -309,7 +309,7 @@
   };
 
   $(document).ready(function() {
-    return $.get('/companies/data').done(function(data) {
+    return $.getJSON('data/company.json').done(function(data) {
       $('#content').html($('#t-lines-areas').html());
       renderStatAreasLines(data);
       $('#areas').click(function() {
@@ -467,7 +467,7 @@
   };
 
   $(document).ready(function() {
-    return $.get('/investevents/data').done(function(data) {
+    return $.getJSON('data/investevents.json').done(function(data) {
       $('#content').html($('#t-lines-times').html());
       renderStatTimesLines(data);
       return $('#times').click(function() {
